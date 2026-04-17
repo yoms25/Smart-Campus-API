@@ -1,0 +1,7 @@
+com\smartcampus\api\data\DataStore.class
+com\smartcampus\api\DiscoveryResource.class
+com\smartcampus\api\models\Sensor.class
+com\smartcampus\api\resources\SensorResource.class
+com\smartcampus\api\SmartCampusApplication.class
+com\smartcampus\api\resources\SensorRoomResource.class
+com\smartcampus\api\models\Room.class
