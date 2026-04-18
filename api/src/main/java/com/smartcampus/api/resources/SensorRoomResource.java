@@ -60,10 +60,7 @@ public class SensorRoomResource {
         
         // Business Logic Constraint: Prevent orphans
         if (!room.getSensorIds().isEmpty()) {
-            // Note: We will upgrade this to a Custom Exception Mapper in Part 5
-            return Response.status(Response.Status.CONFLICT)
-                           .entity("Cannot delete: Room contains active sensors.")
-                           .build();
+            throw new com.smartcampus.api.exceptions.RoomNotEmptyException("Cannot delete: Room contains active sensors.");
         }
         
         rooms.remove(roomId);
