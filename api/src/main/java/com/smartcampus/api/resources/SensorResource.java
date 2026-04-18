@@ -1,16 +1,20 @@
 package com.smartcampus.api.resources;
 
 import com.smartcampus.api.data.DataStore;
+import com.smartcampus.api.exceptions.LinkedResourceNotFoundException;
 import com.smartcampus.api.models.Room;
 import com.smartcampus.api.models.Sensor;
+import com.smartcampus.api.models.SensorReading;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Path("/sensors")
@@ -43,10 +47,7 @@ public class SensorResource {
 
         // Integrity Check: Ensure the roomId exists in the system
         if (!rooms.containsKey(sensor.getRoomId())) {
-            // Note: This will be upgraded to a custom 422 Exception in Part 5
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Linked room does not exist.")
-                    .build();
+            throw new com.smartcampus.api.exceptions.LinkedResourceNotFoundException("Linked room does not exist.");
         }
 
         sensors.put(sensor.getId(), sensor);
@@ -55,5 +56,13 @@ public class SensorResource {
         rooms.get(sensor.getRoomId()).getSensorIds().add(sensor.getId());
 
         return Response.created(URI.create("/api/v1/sensors/" + sensor.getId())).entity(sensor).build();
+    }
+    
+    @Path("/{sensorId}/readings")
+    public SensorReadingResource getSensorReadings(@PathParam("sensorId") String sensorId) {
+        if (!DataStore.getInstance().getSensors().containsKey(sensorId)) {
+            throw new LinkedResourceNotFoundException("Sensor does not exist."); 
+        }
+        return new SensorReadingResource(sensorId);
     }
 }
