@@ -103,4 +103,3 @@ You can test the functionality of the API using the following sample curl comman
    `curl -X POST http://localhost:8080/api/v1/sensors/TEMP-01/readings -H "Content-Type: application/json" -d '{"value":22.5}'`
 5. Trigger Conflict (Delete Room with Sensors)
    `curl -X DELETE http://localhost:8080/api/v1/rooms/LIB-301`
-mpotent.
