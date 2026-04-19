@@ -1,5 +1,5 @@
 # Smart Campus API
-A RESTful API built with JAX-RS (Jersey) to manage campus sensor networks and room analytics.
+The Smart Campus API is a lightweight, RESTful application designed to manage campus infrastructure, including room capacities and environmental sensor networks. Built using JAX-RS and Maven, the system provides a clean, decoupled architecture for tracking sensor readings and room-level analytics without requiring an external database. It facilitates scalable management of campus facilities by offering a robust, thread-safe service for real-time monitoring and data retrieval.
 
 ## Setup Instructions
 1. Clone the repository.
